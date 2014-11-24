@@ -1,0 +1,45 @@
+im = imread('lenaTest3.jpg');
+
+[a b ] = size(im);
+
+out = zeros(16*a,16*b);
+
+for i = 0:a-1
+    for j = 0:b-1
+       cur_pixel    = im(i+1,j+1);
+       
+       rr = uint8(cur_pixel)/16;
+       rr = double(rr);
+       cc = rem(cur_pixel,16);
+       cc = double(cc);
+       
+       out(16*i+1:16*i+rr,16*j+1:16*j+16)   = ones(rr,16);
+       out(16*i+rr+1,16*j+1:16*j+cc)        = ones(1,cc);
+       %her bir pixel 256 pixel (16 x 16) olarak ifade edildi.
+       %Output resimde sol en üstten başlayarak sola ve bir alt satıra
+       %doğru ilerleyerek orjinal resimdeki pixelin değeri kaç ise
+       %output resminde o kadar pixel 1(beyaz) yapıldı.
+       %
+       %örnek: 38 şöyle gösterildi
+       %
+       % 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+       % 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+       % 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0
+       % 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+       % 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+       % 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+       % 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+       % 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+       % 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+       % 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+       % 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+       % 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+       % 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+       % 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+       % 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+       % 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    end
+end
+
+imshow(im);
+figure;imshow(out);
